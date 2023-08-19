@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculator</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div id="cal-screen">
+			<input id="para"></input>
+		</div>
+
+		<div id="cal-keypad">
+
+			<button class="btn" id="Check-back" onclick=checkBack()>Check-Backward</button>
+			<button class="btn" id="Check-straight" onclick=checkStraight()>Check-straight</button>
+			<button class="btn" id='clear' onclick=Clear()>C</button>
+			<button class="btn" id="bracket-start" onclick="val('&#40;')">(</button>
+			<button class="btn" id="bracket-end" onclick="val('&#41;')">)</button>
+			<button class="btn" id="divide" onclick="val('&#47;')">/</button>
+			<button class="btn" id="one" onclick=val(1)>1</button>
+			<button class="btn" id="two" onclick=val(2)>2</button>
+			<button class="btn" id="three" onclick=val(3)>3</button>
+			<button class="btn" id="multiply" onclick="val('&#42;')">*</button>
+			<button class="btn" id="four" onclick=val(4)>4</button>
+			<button class="btn" id="five" onclick=val(5)>5</button>
+			<button class="btn" id="six" onclick=val(6)>6</button>
+			<button class="btn" id="subtract" onclick="val('&#45;')">-</button>
+			<button class="btn" id="seven" onclick=val(7)>7</button>
+			<button class="btn" id="eight" onclick=val(8)>8</button>
+			<button class="btn" id="nine" onclick=val(9)>9</button>
+			<button class="btn" id="adding" onclick="val('&#43;')">+</button>
+			<button class="btn" id="coma" onclick="val('&#44;')">,</button>
+			<button class="btn" id="zero" onclick=val(0)>0</button>
+			<button class="btn" id="cut" onclick=cut()>Cut</button>
+			<button class="btn" id="equal" onclick=equal()>=</button>
+		</div>
+	</div>
+	<script>
+		let arr = [];
+		let screenInput = document.getElementById('para');
+		let backNum = 2;
+		let starightnum = 2
+		let secondArr = []
+
+		function val(val) {
+			screenInput.value += val
+
+			// let buttons = document.getElementsByClassName('btn');
+			// for (let i = 0; i < buttons.length; i++) {
+			// 	buttons[i].style.backgroundColor = 'black';
+			// }
+
+			// setTimeout(function () {
+			// 	for (let i = 0; i < buttons.length; i++) {
+			// 		buttons[i].style.backgroundColor = "#646262d8";
+			// 	}
+			// }, 100);
+		}
+
+		function checkBack() {
+			if (backNum <= arr.length) {
+				let a = arr.length - `${backNum}`
+				console.log(arr[a])
+				screenInput.value = arr[a]
+				secondArr.push(arr[a])
+				backNum = backNum + 1
+
+				console.log(arr)
+				console.log(secondArr)
+
+			}
+		}
+		function checkStraight() {
+
+			console.log(secondArr)
+
+			if (starightnum <= secondArr.length) {
+
+				let staright = secondArr.length - `${starightnum}`
+				screenInput.value = secondArr[staright]
+				starightnum = starightnum + 1
+				secondArr.pop()
+				console.log(secondArr)
+			}
+		}
+
+		function Clear() {
+			screenInput.value = ' '
+			arr = []
+			secondArr = []
+		}
+
+		function equal() {
+			let result = screenInput.value
+			result = eval(result)
+			screenInput.value = result
+			arr.push(result)
+			secondArr.push(result)
+			console.log(arr)
+		}
+	</script>
+</body>
+
+</html>
